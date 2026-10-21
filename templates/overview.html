@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Overview - Ransomware Detection{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Overview</h1>
+  <p>Where your detection workspace stands, and what to do next.</p>
+</div>
+
+<div id="notice"></div>
+
+<section class="panel">
+  <h2>Your progress</h2>
+  <p class="lead">Each step builds on the one before it.</p>
+  <ol class="pipeline" id="pipeline"></ol>
+</section>
+
+<div class="cols wide-left">
+  <section class="panel">
+    <h2>Current dataset</h2>
+    <p class="lead" id="ds-name">Loading...</p>
+    <div class="facts" id="ds-facts"></div>
+  </section>
+  <section class="panel">
+    <h2>Latest model results</h2>
+    <p class="lead" id="res-lead">Loading...</p>
+    <div id="res-body"></div>
+  </section>
+</div>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/overview.js') }}"></script>{% endblock %}

@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+users.db
+instance/
+data/uploaded_dataset.csv
+.env

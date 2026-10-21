@@ -1,0 +1,128 @@
+{
+  "adaboost": {
+    "accuracy": 0.9995999039769544,
+    "precision": 0.9998155321896329,
+    "recall": 0.9992625368731564,
+    "f1": 0.9995389580451821,
+    "fpr": 0.0001413827230312456,
+    "confusion": {
+      "tn": 7072,
+      "fp": 1,
+      "fn": 4,
+      "tp": 5420
+    }
+  },
+  "dnn": {
+    "accuracy": 0.9996799231815636,
+    "precision": 0.999447106524143,
+    "recall": 0.9998156342182891,
+    "f1": 0.9996313364055299,
+    "fpr": 0.00042414816909373674,
+    "confusion": {
+      "tn": 7070,
+      "fp": 3,
+      "fn": 1,
+      "tp": 5423
+    }
+  },
+  "dnn_engine": "sklearn-mlp",
+  "dnn_scaled": true,
+  "importances": [
+    {
+      "feature": "FileName: 'exe'",
+      "value": 0.327452148821759
+    },
+    {
+      "feature": "FileName: 'dll'",
+      "value": 0.27902003056019975
+    },
+    {
+      "feature": "Machine",
+      "value": 0.09075336051480458
+    },
+    {
+      "feature": "ResourceSize",
+      "value": 0.08232902960099216
+    },
+    {
+      "feature": "FileName: 'system'",
+      "value": 0.06659438450265931
+    },
+    {
+      "feature": "DebugSize",
+      "value": 0.051935076266231305
+    },
+    {
+      "feature": "MajorOSVersion",
+      "value": 0.04491851755159869
+    },
+    {
+      "feature": "DllCharacteristics",
+      "value": 0.036468606309007945
+    },
+    {
+      "feature": "IatVRA",
+      "value": 0.020528845872747295
+    },
+    {
+      "feature": "DebugRVA",
+      "value": 0.0
+    },
+    {
+      "feature": "MajorImageVersion",
+      "value": 0.0
+    },
+    {
+      "feature": "ExportRVA",
+      "value": 0.0
+    },
+    {
+      "feature": "ExportSize",
+      "value": 0.0
+    },
+    {
+      "feature": "MajorLinkerVersion",
+      "value": 0.0
+    },
+    {
+      "feature": "MinorLinkerVersion",
+      "value": 0.0
+    },
+    {
+      "feature": "SizeOfStackReserve",
+      "value": 0.0
+    },
+    {
+      "feature": "FileName: 'microsoft'",
+      "value": 0.0
+    },
+    {
+      "feature": "FileName: 'ni'",
+      "value": 0.0
+    },
+    {
+      "feature": "FileName: 'resources'",
+      "value": 0.0
+    },
+    {
+      "feature": "FileName: 'visualstudio'",
+      "value": 0.0
+    }
+  ],
+  "params": {
+    "target": "Benign",
+    "k": 20,
+    "test_size": 0.2,
+    "epochs": 30
+  },
+  "dataset": {
+    "name": "data_file.csv (bundled)",
+    "rows": 62485,
+    "class0": 35367,
+    "class1": 27118,
+    "train_rows": 49988,
+    "test_rows": 12497
+  },
+  "trained_at": "2026-10-08T09:24:13+00:00",
+  "seconds": 48.2
+}

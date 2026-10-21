@@ -1,0 +1,23 @@
+{% extends "auth_base.html" %}
+{% block title %}Create account{% endblock %}
+{% block card %}
+<h2>Create an account</h2>
+<p class="lead">Pick a username and a password to get started.</p>
+<form id="auth-form" data-endpoint="/api/register" data-next="/login?registered=1" novalidate>
+  <label class="field">Username
+    <input type="text" name="username" autocomplete="username" required autofocus>
+    <span class="hint">3-32 characters: letters, numbers, . _ -</span>
+  </label>
+  <label class="field">Password
+    <input type="password" name="password" autocomplete="new-password" required>
+    <span class="hint">At least 6 characters</span>
+  </label>
+  <label class="field">Confirm password
+    <input type="password" name="confirm" autocomplete="new-password" required>
+  </label>
+  <div class="form-error" id="form-error" role="alert"></div>
+  <button class="btn" type="submit">Create account</button>
+</form>
+<p class="alt">Already registered? <a href="/login">Sign in</a></p>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/auth.js') }}"></script>{% endblock %}

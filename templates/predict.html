@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Check a file - Ransomware Detection{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Check a file</h1>
+  <p>Enter a file's header values to see whether the trained model thinks it is benign or malicious.</p>
+</div>
+
+<div id="no-model" hidden>
+  <div class="notice">There is no trained model yet. <a href="/train">Train the models</a> first.</div>
+</div>
+
+<div id="predict-ui" hidden>
+  <div class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-tab="single">One file</button>
+    <button role="tab" aria-selected="false" data-tab="batch">Many files (CSV)</button>
+  </div>
+
+  <div id="tab-single">
+    <div class="cols wide-left">
+      <section class="panel">
+        <h2>File details</h2>
+        <p class="lead">Fill in the values or load an example from the held-out test files.</p>
+        <div class="btn-row" style="margin-bottom:18px">
+          <button class="btn ghost small" type="button" id="ex-benign">Load a benign example</button>
+          <button class="btn ghost small" type="button" id="ex-malicious">Load a malicious example</button>
+        </div>
+        <form id="predict-form">
+          <div class="form-grid" id="fields"></div>
+          <div style="margin:6px 0 18px">
+            <div class="small muted" style="margin-bottom:6px;font-weight:600">Model</div>
+            <div class="seg">
+              <label><input type="radio" name="model" value="adaboost" checked><span>AdaBoost</span></label>
+              <label><input type="radio" name="model" value="dnn"><span>Neural network</span></label>
+            </div>
+          </div>
+          <button class="btn" type="submit">Check this file</button>
+        </form>
+      </section>
+      <section aria-live="polite" id="verdict-host">
+        <div class="verdict empty"><div><strong>No result yet</strong><br>Fill in the form and choose Check this file.</div></div>
+      </section>
+    </div>
+  </div>
+
+  <div id="tab-batch" hidden>
+    <section class="panel">
+      <h2>Check many files at once</h2>
+      <p class="lead" id="batch-cols"></p>
+      <div class="cols" style="align-items:end">
+        <label class="drop" id="drop">
+          <input type="file" id="batch-file" accept=".csv">
+          <strong id="drop-label">Choose a CSV file</strong>
+          <span class="muted small">up to 20,000 rows</span>
+        </label>
+        <div>
+          <div class="small muted" style="margin-bottom:6px;font-weight:600">Model</div>
+          <div class="seg" style="margin-bottom:14px">
+            <label><input type="radio" name="bmodel" value="adaboost" checked><span>AdaBoost</span></label>
+            <label><input type="radio" name="bmodel" value="dnn"><span>Neural network</span></label>
+          </div>
+          <div><button class="btn" id="batch-go" type="button">Check all files</button></div>
+        </div>
+      </div>
+    </section>
+    <section class="panel" id="batch-out" hidden></section>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/predict.js') }}"></script>{% endblock %}

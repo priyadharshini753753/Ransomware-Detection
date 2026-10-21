@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Results - Ransomware Detection{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Results</h1>
+  <p>How AdaBoost and the neural network performed on files they had never seen.</p>
+</div>
+
+<div id="no-model" hidden>
+  <div class="notice">There are no results yet. <a href="/train">Train the models</a> first.</div>
+</div>
+
+<div id="results-ui" hidden>
+  <div id="stale"></div>
+  <section class="panel">
+    <h2>Model comparison</h2>
+    <p class="lead" id="cmp-lead"></p>
+    <div id="cmp-table"></div>
+    <div style="margin-top:22px">
+      <div class="legend"><span><i style="background:var(--cobalt)"></i>AdaBoost</span><span><i style="background:var(--amber)"></i>Neural network</span></div>
+      <div class="chart" id="cmp-chart"></div>
+    </div>
+    <p class="small muted" style="margin:14px 0 0">Higher is better for every measure except false positive rate, where lower is better. Here a false positive is a malicious file wrongly called benign, because the label column marks benign as 1.</p>
+  </section>
+
+  <div class="cols">
+    <section class="panel"><h2>AdaBoost: right and wrong calls</h2><p class="lead" id="cm-ada-lead"></p><div id="cm-ada"></div></section>
+    <section class="panel"><h2>Neural network: right and wrong calls</h2><p class="lead" id="cm-dnn-lead"></p><div id="cm-dnn"></div></section>
+  </div>
+
+  <div class="cols wide-left" style="margin-top:22px">
+    <section class="panel">
+      <h2>What AdaBoost relies on</h2>
+      <p class="lead">Importance of each selected feature. Features that start with the file name column come from words in the file name.</p>
+      <div class="chart" id="importance"></div>
+    </section>
+    <section class="panel">
+      <h2>About this run</h2>
+      <dl id="run-info" style="margin:0"></dl>
+    </section>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/results.js') }}"></script>{% endblock %}

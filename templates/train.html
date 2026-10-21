@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Train models - Ransomware Detection{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Train models</h1>
+  <p>Train AdaBoost and a deep neural network on the current dataset, then compare them.</p>
+</div>
+
+<div class="cols">
+  <section class="panel">
+    <h2>Settings</h2>
+    <p class="lead">The defaults match the original project.</p>
+    <form id="train-form">
+      <label class="field">Label column
+        <select id="target" name="target"></select>
+        <span class="hint">The column that says whether a file is benign (1) or not (0).</span>
+      </label>
+      <label class="field">Features to keep: <output id="k-out">20</output>
+        <input type="range" id="k" min="1" max="60" value="20">
+        <span class="hint">SelectKBest (chi-squared) keeps the most informative features.</span>
+      </label>
+      <label class="field">Share of files held back for testing: <output id="t-out">20%</output>
+        <input type="range" id="test_size" min="10" max="50" step="5" value="20">
+      </label>
+      <label class="field">Maximum training rounds for the neural network
+        <input type="number" id="epochs" min="1" max="100" value="30">
+      </label>
+      <label class="check">
+        <input type="checkbox" id="scale" checked>
+        <span>Standardise features for the neural network
+          <span class="hint">Recommended. Without it the network struggles with very large header values.</span>
+        </span>
+      </label>
+      <div id="engine-note" class="small muted" style="margin-bottom:14px"></div>
+      <button class="btn" type="submit" id="go">Start training</button>
+    </form>
+  </section>
+
+  <section class="panel">
+    <h2>Progress</h2>
+    <p class="lead" id="prog-lead">Nothing is running.</p>
+    <ol class="steps" id="steps"></ol>
+    <div id="train-error"></div>
+    <div id="train-done" hidden>
+      <div class="notice ok">Training finished. The new models are ready to use.</div>
+      <div class="btn-row">
+        <a class="btn" href="/results">See the results</a>
+        <a class="btn ghost" href="/predict">Check a file</a>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/train.js') }}"></script>{% endblock %}

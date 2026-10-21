@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <title>{% block title %}{% endblock %} - Ransomware Detection</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="auth">
+  <section class="auth-side">
+    <h1>Is this file ransomware?</h1>
+    <p>Load a dataset of Windows executable headers, train two classifiers, and check any file against them.</p>
+    <ol>
+      <li><b>Prepare</b> Clean the data, vectorise file names, pick the best features</li>
+      <li><b>Train</b> AdaBoost and a deep neural network on 80% of the files</li>
+      <li><b>Compare</b> Accuracy, precision, recall, F1 and false positive rate</li>
+      <li><b>Check</b> Classify one file or a whole CSV as benign or malicious</li>
+    </ol>
+  </section>
+  <section class="auth-main">
+    <div class="auth-card">{% block card %}{% endblock %}</div>
+  </section>
+</div>
+<div class="toast-host" id="toasts" role="status" aria-live="polite"></div>
+<script src="{{ url_for('static', filename='js/common.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

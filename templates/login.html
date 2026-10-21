@@ -1,0 +1,18 @@
+{% extends "auth_base.html" %}
+{% block title %}Sign in{% endblock %}
+{% block card %}
+<h2>Sign in</h2>
+<p class="lead">Use your account to open the detection workspace.</p>
+<form id="auth-form" data-endpoint="/api/login" data-next="/" novalidate>
+  <label class="field">Username
+    <input type="text" name="username" autocomplete="username" required autofocus>
+  </label>
+  <label class="field">Password
+    <input type="password" name="password" autocomplete="current-password" required>
+  </label>
+  <div class="form-error" id="form-error" role="alert"></div>
+  <button class="btn" type="submit">Sign in</button>
+</form>
+<p class="alt">New here? <a href="/register">Create an account</a></p>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/auth.js') }}"></script>{% endblock %}

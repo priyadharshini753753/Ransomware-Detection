@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <title>{% block title %}Ransomware Detection{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="shell">
+  <aside class="rail">
+    <div class="brand">Ransomware Detection<span>AdaBoost and neural network classifiers</span></div>
+    <nav class="nav" aria-label="Main">
+      {% set items = [
+        ('overview', '/', 'Overview', '<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>'),
+        ('dataset', '/dataset', 'Dataset', '<ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/>'),
+        ('train', '/train', 'Train models', '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>'),
+        ('predict', '/predict', 'Check a file', '<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>'),
+        ('results', '/results', 'Results', '<path d="M4 4v16h16"/><path d="M8 15l3-4 3 2 4-6"/>') ] %}
+      {% for key, href, label, icon in items %}
+      <a href="{{ href }}" {% if active == key %}aria-current="page"{% endif %}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{{ icon|safe }}</svg>
+        <span>{{ label }}</span>
+      </a>
+      {% endfor %}
+    </nav>
+    <div class="rail-foot">
+      <strong>{{ user }}</strong>
+      <button class="linklike" id="logout">Sign out</button>
+    </div>
+  </aside>
+  <main class="main">
+    {% block content %}{% endblock %}
+  </main>
+</div>
+<div class="toast-host" id="toasts" role="status" aria-live="polite"></div>
+<script src="{{ url_for('static', filename='js/common.js') }}"></script>
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

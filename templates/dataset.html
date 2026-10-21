@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Dataset - Ransomware Detection{% endblock %}
+{% block content %}
+<div class="page-head">
+  <h1>Dataset</h1>
+  <p>Look at the data the models learn from, or replace it with your own CSV.</p>
+</div>
+
+<div class="cols wide-left" style="margin-bottom:22px">
+  <section class="panel">
+    <h2 id="ds-title">Loading...</h2>
+    <p class="lead" id="ds-sub"></p>
+    <div class="facts" id="ds-facts"></div>
+  </section>
+  <section class="panel">
+    <h2>Use a different file</h2>
+    <p class="lead">One row per file, one column per feature, and a column with 0/1 labels.</p>
+    <label class="drop" id="drop">
+      <input type="file" id="file" accept=".csv">
+      <strong>Choose a CSV file</strong>
+      <span class="muted small">or drop it here</span>
+    </label>
+    <div class="btn-row" style="margin-top:14px">
+      <button class="btn ghost small" id="reset">Go back to the bundled dataset</button>
+    </div>
+  </section>
+</div>
+
+<section class="panel">
+  <div class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-tab="preview">Preview</button>
+    <button role="tab" aria-selected="false" data-tab="columns">Columns and missing values</button>
+    <button role="tab" aria-selected="false" data-tab="stats">Statistics</button>
+    <button role="tab" aria-selected="false" data-tab="balance">Class balance</button>
+  </div>
+  <div id="tab-preview"></div>
+  <div id="tab-columns" hidden></div>
+  <div id="tab-stats" hidden></div>
+  <div id="tab-balance" hidden></div>
+</section>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/dataset.js') }}"></script>{% endblock %}
