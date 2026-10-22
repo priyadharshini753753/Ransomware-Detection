@@ -48,7 +48,13 @@ app.secret_key = _secret_key()
 # Users (same `users` table as the original project)
 # --------------------------------------------------------------------------
 def db():
-    return sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH)
+    # make sure the table exists on every connection (works under gunicorn too)
+    conn.execute("""CREATE TABLE IF NOT EXISTS users
+                    (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                     username TEXT UNIQUE,
+                     password TEXT)""")
+    return conn
 
 
 def init_db():
@@ -386,10 +392,12 @@ def api_predict_batch():
     return jsonify(rows=rows, counts=counts, labels=names)
 
 
+# Runs on import, so it also works under gunicorn / any hosting platform
+init_db()
+MODELS_LOADED = ml.init()
+
 if __name__ == "__main__":
-    init_db()
-    print("Loading data and models ...")
-    if not ml.init():
+    if not MODELS_LOADED:
         print("No saved models found (or they were made with another library version).")
         print("Open the 'Train models' page in the app, or run:  python train_model.py")
     print("Open http://127.0.0.1:5000 in your browser")
